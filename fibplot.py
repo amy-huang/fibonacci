@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 from math import sqrt
 # Which fibonacci numbers and approximations to plot?
-start = 450
-end = 475
+start = 100 
+end = 110
 xvals = [i for i in range(start, end)]
 
 
@@ -33,12 +33,27 @@ plt.plot(xvals, approxlist[start:end], marker='o', color='b', label='first appro
 
 # Plotting second approximations
 approxlist = [1, 1]
+mult2 = .5 * (1 + sqrt(4.995))
+for i in range(end + 2):
+    approxlist.append(mult2 * approxlist[len(approxlist) - 1])
+#print([float(truncate(approxlist[i], 3)) for i in range(start, end)])
+#plt.plot(xvals, approxlist[start:end], marker='o', color='g', label='sqrt(4.999)')
+
+# Plotting third approximations
+approxlist = [1, 1]
+mult2 = .5 * (.999 + sqrt(5))
+for i in range(end + 2):
+    approxlist.append(mult2 * approxlist[len(approxlist) - 1])
+#print([float(truncate(approxlist[i], 3)) for i in range(start, end)])
+#plt.plot(xvals, approxlist[start:end], marker='o', color='y', label='.999 + sqrt(5)')
+
+# Plotting fourth approximations
+approxlist = [1, 1]
 mult2 = .5 * (1 + sqrt(5.005))
 for i in range(end + 2):
     approxlist.append(mult2 * approxlist[len(approxlist) - 1])
 #print([float(truncate(approxlist[i], 3)) for i in range(start, end)])
-print([int(approxlist[i]) for i in range(start, end)])
-plt.plot(xvals, approxlist[start:end], marker='o', color='g', label='second approximations')
+plt.plot(xvals, approxlist[start:end], marker='o', color='m', label='sqrt(5.005)')
 
 plt.legend()
 plt.title(str(start) + ' to ' + str(end) + ' fibonacci numbers and approximations')
@@ -46,4 +61,5 @@ plt.axis([start, end, mult**(start), mult**(end - 1)])
 plt.ylabel('kth fibonacci number or approximation')
 plt.xlabel('k')
 
+plt.savefig('all3mearly.jpg')
 plt.show()
